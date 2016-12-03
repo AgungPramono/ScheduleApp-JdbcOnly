@@ -13,6 +13,10 @@ package com.agung.jadwal.domain;
  */
 public class Trainer {
 
+    private Integer id;
+    private String kodeGuru;
+    private String namaGuru;
+    
     public Integer getId() {
         return id;
     }
@@ -36,8 +40,4 @@ public class Trainer {
     public void setNamaGuru(String namaGuru) {
         this.namaGuru = namaGuru;
     }
-    private Integer id;
-    private String kodeGuru;
-    private String namaGuru;
-    
 }
