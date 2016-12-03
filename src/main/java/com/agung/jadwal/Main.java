@@ -8,11 +8,8 @@
 
 package com.agung.jadwal;
 
-import com.agung.jadwal.dao.InstructorDao;
-import com.agung.jadwal.domain.Trainer;
 
 import com.agung.jadwal.ui.MainFrame;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
