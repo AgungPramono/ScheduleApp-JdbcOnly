@@ -22,13 +22,13 @@ import java.util.logging.Logger;
  */
 public class RuangDao {
 
-    private static final String SQL_SAVE_RUANG = "insert into ruang values (?,?)";
-    private static final String SQL_SELECT_ALL = "select * from ruang";
+    private static final String SQL_SAVE_RUANG = "insert into ruang (kode_ruang,ruang) values (?,?)";
+    private static final String SQL_SELECT_ALL = "select * from ruang"; 
 
     public void saveRuang(Ruang ruang) {
         try {
             saveRuangProcess(ruang);
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(RuangDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -56,8 +56,7 @@ public class RuangDao {
         return result;
     }
 
-    private void saveRuangProcess(Ruang ruang) throws SQLException,
-            ClassNotFoundException {
+    private void saveRuangProcess(Ruang ruang) throws SQLException{
         Connection conn = KoneksiHelper.getConnection();
         PreparedStatement ps = conn.prepareStatement(SQL_SAVE_RUANG);
         ps.setString(1, ruang.getKode_ruang());

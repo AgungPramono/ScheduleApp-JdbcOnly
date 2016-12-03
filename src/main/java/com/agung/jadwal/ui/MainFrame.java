@@ -19,6 +19,7 @@ import com.agung.jadwal.domain.Ruang;
 import com.agung.jadwal.domain.Trainer;
 import com.agung.jadwal.tblmodel.JadwalTableModel;
 import com.agung.jadwal.tblmodel.MateriTableModel;
+import com.agung.jadwal.tblmodel.RuangTableModel;
 import com.agung.jadwal.util.TableUtil;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -57,6 +58,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addListSelectionListener(new TableInstructorSelection());
         tblJadwal.getSelectionModel()
                 .addListSelectionListener(new TableJadwalSelection());
+        tblRuang.getSelectionModel()
+                .addListSelectionListener(new TableRuangSelection());
         btnSimpanMateri.setEnabled(false);
         fetchFormJadwal();
     }
@@ -86,8 +89,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void fetchFormRuang() {
         ruangs = ruangDao.cariSemuaRuang();
         if (!ruangs.isEmpty() && ruangs != null) {
-
+            tblRuang.setModel(new RuangTableModel(ruangs));
         }
+        TableUtil.initColumn(tblRuang);
     }
 
     private void fetchFormInstructor() {
@@ -124,8 +128,12 @@ public class MainFrame extends javax.swing.JFrame {
         return false;
     }
 
-    private void validateFormRuang() {
-
+    private Boolean validateFormRuang() {
+        if (txtKodeRuang.getText().trim().length() >0 
+                && txtNamaRuang.getText().trim().length() >0) {
+            return true;
+        }
+        return false;
     }
 
     private Boolean validateFormInstructor() {
@@ -134,10 +142,6 @@ public class MainFrame extends javax.swing.JFrame {
             return true;
         }
         return false;
-    }
-
-    private void validateFormJadwal() {
-
     }
     //end
 
@@ -149,11 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
         txKodeMateri.setText("");
     }
     // end
-
-    private void loadDomainMateriToForm() {
-
-    }
-
+    
     private void loadFormMateriToDomain() {
         if (materi == null) {
             materi = new Materi();
@@ -195,6 +195,14 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMateri = new javax.swing.JTable();
         pnlRuang = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblRuang = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtKodeRuang = new javax.swing.JTextField();
+        txtNamaRuang = new javax.swing.JTextField();
+        btnSmpnRuang = new javax.swing.JButton();
+        btnRfrshRuang = new javax.swing.JButton();
         pnlInstructor = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtKodeInstructor = new javax.swing.JTextField();
@@ -453,7 +461,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -463,16 +471,87 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlRuang.setBorder(javax.swing.BorderFactory.createTitledBorder("Ruang"));
 
+        tblRuang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Kode Ruang", "Nama Ruang"
+            }
+        ));
+        tblRuang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane4.setViewportView(tblRuang);
+
+        jLabel8.setText("Kode Ruang");
+
+        jLabel9.setText("Nama Ruang");
+
+        btnSmpnRuang.setText("Simpan");
+        btnSmpnRuang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSmpnRuangActionPerformed(evt);
+            }
+        });
+
+        btnRfrshRuang.setText("Refresh");
+        btnRfrshRuang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRfrshRuangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlRuangLayout = new javax.swing.GroupLayout(pnlRuang);
         pnlRuang.setLayout(pnlRuangLayout);
         pnlRuangLayout.setHorizontalGroup(
             pnlRuangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGroup(pnlRuangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRuangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlRuangLayout.createSequentialGroup()
+                        .addGroup(pnlRuangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlRuangLayout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtKodeRuang, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlRuangLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNamaRuang, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(238, 238, 238))
+                    .addGroup(pnlRuangLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4)
+                        .addContainerGap())
+                    .addGroup(pnlRuangLayout.createSequentialGroup()
+                        .addComponent(btnSmpnRuang)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRfrshRuang)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
+
+        pnlRuangLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel8, jLabel9});
+
         pnlRuangLayout.setVerticalGroup(
             pnlRuangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRuangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRuangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtKodeRuang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRuangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtNamaRuang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRuangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSmpnRuang)
+                    .addComponent(btnRfrshRuang))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
         );
+
+        pnlRuangLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel8, jLabel9});
+
+        pnlRuangLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtKodeRuang, txtNamaRuang});
 
         jPanel3.add(pnlRuang, "RUANG");
 
@@ -590,7 +669,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -638,7 +717,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnTambahJadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
         );
 
         jPanel3.add(pnlJadwal, "JADWAL");
@@ -711,6 +790,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnJadwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJadwalActionPerformed
         showPanel("JADWAL");
+        fetchFormJadwal();
     }//GEN-LAST:event_btnJadwalActionPerformed
 
     private void tblMateriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMateriMouseClicked
@@ -735,6 +815,19 @@ public class MainFrame extends javax.swing.JFrame {
     private void loadFormJadwalToDomain() {
     }
 
+    private void clearFormRuang() {
+        txtKodeRuang.setText("");
+        txtNamaRuang.setText("");
+    }
+
+    private void loadFormRuangToDomain() {
+        if (ruang == null) {
+            ruang  = new Ruang();
+        }
+        ruang.setKodeRuang(txtKodeRuang.getText());
+        ruang.setRuang(txtNamaRuang.getText());
+    }
+
     class TableMateriSelection implements ListSelectionListener {
 
         @Override
@@ -757,7 +850,9 @@ public class MainFrame extends javax.swing.JFrame {
             if (e.getValueIsAdjusting()) {
                 return;
             }
-          
+            if(tblRuang.getSelectedRow() > 0){
+                ruang = ruangs.get(tblRuang.getSelectedRow());
+            }
         }
     }
 
@@ -877,6 +972,25 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTambahJadwalActionPerformed
 
+    private void btnSmpnRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSmpnRuangActionPerformed
+        if (validateFormRuang()) {
+            loadFormRuangToDomain();
+            if (ruang != null) {
+                ruangDao.saveRuang(ruang);
+                clearFormRuang();
+                fetchFormRuang();
+                ruang = null;
+            }
+        }else{
+            showDialog("Data yang diinputkan tidak lengkap !!");
+        }
+    }//GEN-LAST:event_btnSmpnRuangActionPerformed
+
+    private void btnRfrshRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRfrshRuangActionPerformed
+        clearFormRuang();
+        fetchFormRuang();
+    }//GEN-LAST:event_btnRfrshRuangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -887,9 +1001,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnMateri;
     private javax.swing.JButton btnRefreshInstructor;
     private javax.swing.JButton btnRefreshMateri;
+    private javax.swing.JButton btnRfrshRuang;
     private javax.swing.JToggleButton btnRuang;
     private javax.swing.JButton btnSimpanInstructor;
     private javax.swing.JButton btnSimpanMateri;
+    private javax.swing.JButton btnSmpnRuang;
     private javax.swing.JButton btnTambahJadwal;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.agung.jadwal.ui.component.ImagePanel imagePanel1;
@@ -901,12 +1017,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JMenuItem menuDelete;
@@ -918,11 +1037,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTable tblInstructor;
     private javax.swing.JTable tblJadwal;
     private javax.swing.JTable tblMateri;
+    private javax.swing.JTable tblRuang;
     private javax.swing.JTextField txKodeMateri;
     private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtKodeInstructor;
+    private javax.swing.JTextField txtKodeRuang;
     private javax.swing.JTextField txtMateri;
     private javax.swing.JTextField txtNamaInstructor;
+    private javax.swing.JTextField txtNamaRuang;
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 
