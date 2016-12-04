@@ -60,7 +60,7 @@ public class JadwalDaoTest {
         
     }
     
-    //@Test
+    @Test
     public void testFindByName(){
         List<Jadwal> j = jd.cariJadwalByMapel("Android");
         Assert.assertNotNull(j);

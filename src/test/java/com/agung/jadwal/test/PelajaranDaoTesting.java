@@ -14,11 +14,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -27,9 +28,11 @@ public class PelajaranDaoTesting {
 
     private Connection con;
     private PelajaranDao pd;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(PelajaranDaoTesting.class);
+    
     @Before
     public void setup() throws SQLException, ClassNotFoundException {
+        LOGGER.debug("===== Menjalankan Method Before =====");
         String dbDriver = "com.mysql.jdbc.Driver";
         String dbUrl = "jdbc:mysql://localhost:3306/db_trainingapp";
         String dbUser = "root";

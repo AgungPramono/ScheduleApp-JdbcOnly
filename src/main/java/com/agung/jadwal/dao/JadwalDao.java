@@ -105,7 +105,6 @@ public class JadwalDao {
 
         Connection con = getConnection();
         ResultSet rs = con.prepareStatement(sbQuery.toString()).executeQuery();
-
         while (rs.next()) {
             Jadwal jadwal = jadwalResultSetConverter(rs);
             dataJadwals.add(jadwal);

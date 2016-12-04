@@ -12,6 +12,7 @@ import com.agung.jadwal.Main;
 import com.agung.jadwal.dao.InstructorDao;
 import com.agung.jadwal.dao.JadwalDao;
 import com.agung.jadwal.dao.PelajaranDao;
+import com.agung.jadwal.dao.ReportService;
 import com.agung.jadwal.dao.RuangDao;
 import com.agung.jadwal.domain.Jadwal;
 import com.agung.jadwal.domain.Materi;
@@ -21,13 +22,17 @@ import com.agung.jadwal.tblmodel.JadwalTableModel;
 import com.agung.jadwal.tblmodel.MateriTableModel;
 import com.agung.jadwal.tblmodel.RuangTableModel;
 import com.agung.jadwal.util.TableUtil;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -222,6 +227,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblJadwal = new javax.swing.JTable();
         btnTambahJadwal = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         imagePanelTop1 = new com.agung.jadwal.ui.component.ImagePanelTop();
         jLabel7 = new javax.swing.JLabel();
 
@@ -691,10 +697,22 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tblJadwal);
 
         btnTambahJadwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/add_2.png"))); // NOI18N
-        btnTambahJadwal.setText("Tambah Jadwal");
+        btnTambahJadwal.setText("Add");
+        btnTambahJadwal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTambahJadwal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnTambahJadwal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTambahJadwalActionPerformed(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/printer_1.png"))); // NOI18N
+        jButton1.setText("Print");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -707,18 +725,26 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(pnlJadwalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
                     .addGroup(pnlJadwalLayout.createSequentialGroup()
-                        .addComponent(btnTambahJadwal)
+                        .addComponent(btnTambahJadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        pnlJadwalLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnTambahJadwal, jButton1});
+
         pnlJadwalLayout.setVerticalGroup(
             pnlJadwalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlJadwalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnTambahJadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlJadwalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(btnTambahJadwal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
         );
+
+        pnlJadwalLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnTambahJadwal, jButton1});
 
         jPanel3.add(pnlJadwal, "JADWAL");
 
@@ -991,6 +1017,24 @@ public class MainFrame extends javax.swing.JFrame {
         fetchFormRuang();
     }//GEN-LAST:event_btnRfrshRuangActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JDialog dialog = new JDialog(MainFrame.this,true);
+        dialog.setTitle("Cetak Jadwal");
+        
+        ReportService rs = new ReportService();
+        JasperPrint jp = 
+                rs.getJadwalReport();
+        JRViewer viewer = new JRViewer(jp);
+        dialog.add(viewer);
+        dialog.add(viewer, BorderLayout.CENTER);
+
+        dialog.pack();
+        dialog.setSize(800, 600);
+        dialog.setLocationRelativeTo(null);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -1010,6 +1054,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private com.agung.jadwal.ui.component.ImagePanel imagePanel1;
     private com.agung.jadwal.ui.component.ImagePanelTop imagePanelTop1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
