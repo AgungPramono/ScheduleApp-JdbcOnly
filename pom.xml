@@ -19,7 +19,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.agung.jadwal.ListJadwal</mainClass>
+                            <mainClass>com.agung.jadwal.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
