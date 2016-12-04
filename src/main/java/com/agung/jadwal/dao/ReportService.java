@@ -10,6 +10,7 @@ package com.agung.jadwal.dao;
 
 import com.agung.jadwal.domain.Jadwal;
 import com.agung.jadwal.domain.Report;
+import java.text.SimpleDateFormat;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,13 +53,14 @@ public class ReportService {
         try {
             
             JRFileVirtualizer virtualizer = new JRFileVirtualizer(20, "/tmp");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
             
             InputStream inputStream =
                     getClass().getResourceAsStream("/report/jadwal_pelajaran.jasper");
             List<Report> data = getData();
             
             Map<String,Object> parameter = new HashMap<>();
-            parameter.put("tanggalCetak", new Date());
+            parameter.put("tanggalCetak", sdf.format(new Date()));
             parameter.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
             
             JasperPrint jp =
