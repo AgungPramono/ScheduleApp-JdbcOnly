@@ -12,7 +12,7 @@ import com.agung.jadwal.dao.InstructorDao;
 import com.agung.jadwal.dao.JadwalDao;
 import com.agung.jadwal.dao.PelajaranDao;
 import com.agung.jadwal.dao.RuangDao;
-import com.agung.jadwal.domain.Trainer;
+import com.agung.jadwal.domain.Instructor;
 import com.agung.jadwal.domain.Jadwal;
 import com.agung.jadwal.domain.Materi;
 import com.agung.jadwal.domain.Ruang;
@@ -27,7 +27,7 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
 
     private Jadwal jadwal;
     private JadwalDao jadwalDao;
-    private List<Trainer> listGuru;
+    private List<Instructor> listGuru;
     private List<Materi> listPelajaran;
     private List<Ruang> listRuang;
     
@@ -39,15 +39,18 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
         super(new JFrame(), true);
         initComponents();
         setLocationRelativeTo(null);
+        
         loadDataToComboBox();
     }
 
     public Jadwal showDialog() {
+        setTitle("Add Jadwal");
         setVisible(true);
         return jadwal;
     }
 
     public Jadwal showEditDialog(Jadwal jadwal) {
+        setTitle("Edit Jadwal");
         this.jadwal = jadwal;
         loadDomainToForm();
         setVisible(true);
@@ -69,8 +72,8 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
         Ruang r = listRuang.get(cmbRuang.getSelectedIndex());
         jadwal.setRuang(r);
         
-        Trainer g = listGuru.get(cmbInstructor.getSelectedIndex());
-        jadwal.setGuru(g);
+        Instructor g = listGuru.get(cmbInstructor.getSelectedIndex());
+        jadwal.setInstructor(g);
     }
 
     private void loadDomainToForm() {
@@ -78,7 +81,7 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
         cmbHari.setSelectedItem(jadwal.getHari());
         cmbPelajaran.setSelectedItem(jadwal.getPelajaran().getMateri());
         cmbRuang.setSelectedItem(jadwal.getRuang().getRuang());
-        cmbInstructor.setSelectedItem(jadwal.getGuru().getNamaGuru());
+        cmbInstructor.setSelectedItem(jadwal.getInstructor().getNamaGuru());
     }
 
     private void loadDataToComboBox() {
@@ -92,7 +95,7 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
         cmbInstructor.removeAllItems();
 
         listGuru = instructorDao.cariSemua();
-        for (Trainer g : listGuru) {
+        for (Instructor g : listGuru) {
             cmbInstructor.addItem(g.getNamaGuru());
         }
         
@@ -121,27 +124,25 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cmbJam = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        cmbHari = new javax.swing.JComboBox<>();
+        cmbHari = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        cmbPelajaran = new javax.swing.JComboBox<>();
+        cmbPelajaran = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        cmbRuang = new javax.swing.JComboBox<>();
+        cmbRuang = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        cmbInstructor = new javax.swing.JComboBox<>();
+        cmbInstructor = new javax.swing.JComboBox();
         btnSimpan = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
+        cmbJam = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Jam Ke");
 
-        cmbJam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
-
         jLabel2.setText("Hari");
 
-        cmbHari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu" }));
+        cmbHari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu" }));
 
         jLabel3.setText("Pelajaran");
 
@@ -163,6 +164,8 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
             }
         });
 
+        cmbJam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -175,7 +178,8 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbJam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cmbJam, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -276,11 +280,11 @@ public class FrameDialogJadwal extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatal;
     private javax.swing.JButton btnSimpan;
-    private javax.swing.JComboBox<String> cmbHari;
-    private javax.swing.JComboBox<String> cmbInstructor;
+    private javax.swing.JComboBox cmbHari;
+    private javax.swing.JComboBox cmbInstructor;
     private javax.swing.JComboBox<String> cmbJam;
-    private javax.swing.JComboBox<String> cmbPelajaran;
-    private javax.swing.JComboBox<String> cmbRuang;
+    private javax.swing.JComboBox cmbPelajaran;
+    private javax.swing.JComboBox cmbRuang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -9,7 +9,7 @@ package com.agung.jadwal.dao;
 
 import static com.agung.jadwal.dao.KoneksiHelper.*;
 
-import com.agung.jadwal.domain.Trainer;
+import com.agung.jadwal.domain.Instructor;
 import com.agung.jadwal.domain.Jadwal;
 import com.agung.jadwal.domain.Materi;
 import com.agung.jadwal.domain.Ruang;
@@ -68,7 +68,7 @@ public class JadwalDao {
             ps.setInt(2, j.getJam());
             ps.setInt(3, j.getRuang().getId());
             ps.setInt(4, j.getPelajaran().getId());
-            ps.setInt(5, j.getGuru().getId());
+            ps.setInt(5, j.getInstructor().getId());
             ps.executeUpdate();
             destroyConnection(conn);
         } else {
@@ -79,7 +79,7 @@ public class JadwalDao {
             ps.setInt(2, j.getJam());
             ps.setInt(3, j.getRuang().getId());
             ps.setInt(4, j.getPelajaran().getId());
-            ps.setInt(5, j.getGuru().getId());
+            ps.setInt(5, j.getInstructor().getId());
             ps.setInt(6, j.getId());
             ps.executeUpdate();
             destroyConnection(con);
@@ -187,9 +187,9 @@ public class JadwalDao {
         r.setKodeRuang(rs.getString("kode_ruang"));
         jd.setRuang(r);
 
-        Trainer g = new Trainer();
+        Instructor g = new Instructor();
         g.setNamaGuru(rs.getString("nama_guru"));
-        jd.setGuru(g);
+        jd.setInstructor(g);
 
         return jd;
     }

@@ -9,7 +9,7 @@
 package com.agung.jadwal.test;
 
 import com.agung.jadwal.dao.InstructorDao;
-import com.agung.jadwal.domain.Trainer;
+import com.agung.jadwal.domain.Instructor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -38,9 +38,9 @@ public class InstructorDaoTest {
     
     @Test
     public void testFindAllInstructor(){
-        List<Trainer> resultAll = instructorDao.cariSemua();
+        List<Instructor> resultAll = instructorDao.cariSemua();
         Assert.assertNotNull(resultAll);
-        for (Trainer t : resultAll) {
+        for (Instructor t : resultAll) {
             System.out.println("kode "+ t.getKodeGuru());
         }
     }

@@ -52,7 +52,7 @@ public class JadwalTableModel extends AbstractTableModel {
             case 3:
                 return j.getRuang().getRuang();
             case 4:
-                return j.getGuru().getNamaGuru();
+                return j.getInstructor().getNamaGuru();
             default:
                 return new Object();
         }

@@ -17,7 +17,7 @@ public class Jadwal {
    private String hari;
    private Materi pelajaran;
    private Ruang ruang;
-   private Trainer guru;
+   private Instructor instructor;
 
     public Integer getJam() {
         return jam;
@@ -27,12 +27,12 @@ public class Jadwal {
         this.jam = jam;
     }
    
-    public Trainer getGuru() {
-        return guru;
+    public Instructor getInstructor() {
+        return instructor;
     }
 
-    public void setGuru(Trainer guru) {
-        this.guru = guru;
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     public Ruang getRuang() {
@@ -66,5 +66,11 @@ public class Jadwal {
     public void setPelajaran(Materi pelajaran) {
         this.pelajaran = pelajaran;
     }
+
+    @Override
+    public String toString() {
+        return pelajaran.getMateri();
+    }
    
+    
 }

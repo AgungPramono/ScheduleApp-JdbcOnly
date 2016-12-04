@@ -7,7 +7,7 @@
 //
 package com.agung.jadwal.dao;
 
-import com.agung.jadwal.domain.Trainer;
+import com.agung.jadwal.domain.Instructor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +29,7 @@ public class InstructorDao {
     private static final String SQl_SELECT_ALL = "select * from guru";
     private static final String SQL_SAVE = "insert into guru (kode_guru,nama_guru) values (?,?)";
 
-    public void saveTrainer(Trainer t){
+    public void saveTrainer(Instructor t){
         try {
             trainerSaveProcess(t);
         } catch (SQLException ex) {
@@ -40,7 +40,7 @@ public class InstructorDao {
         }
     }
     
-    private void trainerSaveProcess(Trainer t) throws SQLException, ClassNotFoundException{
+    private void trainerSaveProcess(Instructor t) throws SQLException, ClassNotFoundException{
         Connection con = KoneksiHelper.getConnection();
         PreparedStatement ps = con.prepareStatement(SQL_SAVE);
         ps.setString(1, t.getKodeGuru());
@@ -50,7 +50,7 @@ public class InstructorDao {
     }
     
     //cari semua data guru
-    public List<Trainer> cariSemua() {
+    public List<Instructor> cariSemua() {
         try {
             return findAllProcess();
         } catch (SQLException | ClassNotFoundException ex) {
@@ -59,21 +59,21 @@ public class InstructorDao {
         return null;
     }
     
-    private List<Trainer> findAllProcess() throws SQLException, ClassNotFoundException{
-        List<Trainer> result = new ArrayList<>();
+    private List<Instructor> findAllProcess() throws SQLException, ClassNotFoundException{
+        List<Instructor> result = new ArrayList<>();
         Connection con = KoneksiHelper.getConnection();
         PreparedStatement ps = con.prepareStatement(SQl_SELECT_ALL);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            Trainer t = resultSetConverter(rs);
+            Instructor t = resultSetConverter(rs);
             result.add(t);
         }
         KoneksiHelper.destroyConnection(con);
         return result;
     }
 
-    private Trainer resultSetConverter(ResultSet rs) throws SQLException {
-        Trainer g = new Trainer();
+    private Instructor resultSetConverter(ResultSet rs) throws SQLException {
+        Instructor g = new Instructor();
         g.setId(rs.getInt("id"));
         g.setKodeGuru(rs.getString("kode_guru"));
         g.setNamaGuru(rs.getString("nama_guru"));

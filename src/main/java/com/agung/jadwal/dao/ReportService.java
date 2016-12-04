@@ -42,7 +42,7 @@ public class ReportService {
             rp.setHari(j.getHari());
             rp.setPelajaran(j.getPelajaran().getMateri());
             rp.setRuang(j.getRuang().getRuang());
-            rp.setInstructor(j.getGuru().getNamaGuru());
+            rp.setInstructor(j.getInstructor().getNamaGuru());
             
             dataReport.add(rp);
         }
@@ -54,6 +54,7 @@ public class ReportService {
             
             JRFileVirtualizer virtualizer = new JRFileVirtualizer(20, "/tmp");
             SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+            //JadwalDao jd = new JadwalDao();
             
             InputStream inputStream =
                     getClass().getResourceAsStream("/report/jadwal_pelajaran.jasper");

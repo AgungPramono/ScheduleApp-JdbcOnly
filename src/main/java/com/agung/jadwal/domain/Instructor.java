@@ -1,5 +1,5 @@
 //
-// Trainer.java
+// Instructor.java
 // Jadwal-Pelajaran 
 //
 // Created by Agung Pramono on 30/09/2016 
@@ -11,7 +11,7 @@ package com.agung.jadwal.domain;
 /**
  *
  */
-public class Trainer {
+public class Instructor {
 
     private Integer id;
     private String kodeGuru;

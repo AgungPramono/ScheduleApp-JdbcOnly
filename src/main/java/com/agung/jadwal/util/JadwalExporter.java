@@ -37,7 +37,7 @@ public class JadwalExporter {
                 output.print(",");
                 output.print(jadwal.getRuang().getRuang());
                 output.print(",");
-                output.print(jadwal.getGuru().getNamaGuru());
+                output.print(jadwal.getInstructor().getNamaGuru());
                 output.println();
                 output.flush();
             }

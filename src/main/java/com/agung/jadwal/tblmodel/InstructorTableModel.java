@@ -7,7 +7,7 @@
 //
 package com.agung.jadwal.tblmodel;
 
-import com.agung.jadwal.domain.Trainer;
+import com.agung.jadwal.domain.Instructor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -17,10 +17,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class InstructorTableModel extends AbstractTableModel{
 
-    private List<Trainer> listTrainers = new ArrayList<>();
+    private List<Instructor> listTrainers = new ArrayList<>();
     private final String[] header = {"kode Trainer","Nama Trainer"};
 
-    public InstructorTableModel(List<Trainer> trainers) {
+    public InstructorTableModel(List<Instructor> trainers) {
         this.listTrainers = trainers;
     }
 
@@ -41,7 +41,7 @@ public class InstructorTableModel extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Trainer t = listTrainers.get(rowIndex);
+        Instructor t = listTrainers.get(rowIndex);
         switch(columnIndex){
             case 0:
                 return t.getKodeGuru();

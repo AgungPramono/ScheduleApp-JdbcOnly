@@ -17,7 +17,7 @@ import com.agung.jadwal.dao.RuangDao;
 import com.agung.jadwal.domain.Jadwal;
 import com.agung.jadwal.domain.Materi;
 import com.agung.jadwal.domain.Ruang;
-import com.agung.jadwal.domain.Trainer;
+import com.agung.jadwal.domain.Instructor;
 import com.agung.jadwal.tblmodel.JadwalTableModel;
 import com.agung.jadwal.tblmodel.MateriTableModel;
 import com.agung.jadwal.tblmodel.RuangTableModel;
@@ -40,12 +40,12 @@ import net.sf.jasperreports.swing.JRViewer;
 public class MainFrame extends javax.swing.JFrame {
 
     private Materi materi;
-    private Trainer trainer;
+    private Instructor trainer;
     private Ruang ruang;
     private Jadwal jadwal;
 
     private List<Materi> materis;
-    private List<Trainer> trainers;
+    private List<Instructor> trainers;
     private List<Ruang> ruangs;
     private List<Jadwal> jadwals;
 
@@ -197,7 +197,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnAddMateri = new javax.swing.JButton();
         btnSimpanMateri = new javax.swing.JButton();
         btnRefreshMateri = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
         tblMateri = new javax.swing.JTable();
         pnlRuang = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -421,12 +421,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         ));
         tblMateri.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tblMateri.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblMateriMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblMateri);
+        jScrollPane5.setViewportView(tblMateri);
 
         javax.swing.GroupLayout pnlMateriLayout = new javax.swing.GroupLayout(pnlMateri);
         pnlMateri.setLayout(pnlMateriLayout);
@@ -436,7 +431,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlMateriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
                     .addGroup(pnlMateriLayout.createSequentialGroup()
                         .addGroup(pnlMateriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlMateriLayout.createSequentialGroup()
@@ -447,7 +441,8 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txKodeMateri, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -467,7 +462,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addComponent(jScrollPane5)
                 .addContainerGap())
         );
 
@@ -552,7 +547,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(btnSmpnRuang)
                     .addComponent(btnRfrshRuang))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
         );
 
         pnlRuangLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel8, jLabel9});
@@ -675,7 +670,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -741,7 +736,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(btnTambahJadwal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))
         );
 
         pnlJadwalLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnTambahJadwal, jButton1});
@@ -819,15 +814,9 @@ public class MainFrame extends javax.swing.JFrame {
         fetchFormJadwal();
     }//GEN-LAST:event_btnJadwalActionPerformed
 
-    private void tblMateriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMateriMouseClicked
-        if (evt.getButton() == MouseEvent.BUTTON3) {
-            jPopupMenu1.show((Component) evt.getSource(), evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_tblMateriMouseClicked
-
     private void loadFormInstructorToDomain() {
         if (trainer == null) {
-            trainer = new Trainer();
+            trainer = new Instructor();
         }
         trainer.setKodeGuru(txtKodeInstructor.getText());
         trainer.setNamaGuru(txtNamaInstructor.getText());
@@ -1067,10 +1056,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JMenuItem menuDelete;
