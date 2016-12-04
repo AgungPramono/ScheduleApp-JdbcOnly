@@ -101,7 +101,7 @@ public class JadwalDao {
 
     private List<Jadwal> findAllJadwals() throws SQLException{
         List<Jadwal> dataJadwals = new ArrayList<>();
-        //sbQuery.append(" order by p.nama_mapel");
+        sbQuery.append(" order by p.nama_mapel");
 
         Connection con = getConnection();
         ResultSet rs = con.prepareStatement(sbQuery.toString()).executeQuery();
